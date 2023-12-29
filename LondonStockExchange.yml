@@ -106,7 +106,7 @@ paths:
             content:
               application/json:    
                 schema:
-                  $ref: "#/components/schemas/GetAllStockPricesResponse"
+                  $ref: "#/components/schemas/GetStockPricesResponse"
           default:
               description: Standard Error Response
               content:
@@ -153,7 +153,7 @@ components:
             description: "Error message"
             type: string
             example: "Bad request"
-    GetAllStockPricesResponse:
+    GetStockPricesResponse:
         properties:
           price:
             type: array
