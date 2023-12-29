@@ -77,26 +77,26 @@ Error Codes:
 Entities: Trade, Stock, Broker 
 1. Broker table
 Fields:
-broker_Id (INT PRIMARY KEY)- One to many relationships with multiple trade transactions
-broker_name (VARCHAR)
-email (VARCHAR)
+broker_Id (INT PRIMARY KEY)- One to many relationships with multiple trade transactions,
+broker_name (VARCHAR),
+email (VARCHAR),
 status (VARCHAR)
 
 2. Trade table
 Fields:
-order_id (INT PRIMARY KEY)
-trade_id (INT PRIMARY KEY)
-broker_Id (INT FOREIGN KEY REFERENCES Broker(broker_Id))
-stock_symbol (VARCHAR)
-order_type (VARCHAR) 
-price (DECIMAL)
-numberOfShares (INT)
-timestamp (DATETIME)
+order_id (INT PRIMARY KEY),
+trade_id (INT PRIMARY KEY),
+broker_Id (INT FOREIGN KEY REFERENCES Broker(broker_Id)),
+stock_symbol (VARCHAR),
+order_type (VARCHAR),
+price (DECIMAL),
+numberOfShares (INT),
+timestamp (DATETIME),
 orderStatus (VARCHAR) 
 
 3. Stock table
 Fields:
-stock_symbol (VARCHAR PRIMARY KEY)- One to many relationships with trade transactions
-current_price (DECIMAL)
-company_name (VARCHAR)
+stock_symbol (VARCHAR PRIMARY KEY)- One to many relationships with trade transactions,
+current_price (DECIMAL),
+company_name (VARCHAR),
 market_cap (DECIMAL)
