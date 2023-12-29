@@ -1,0 +1,181 @@
+openapi: "3.0.3"
+info:
+    title: London StockExchange Microservice
+    description: Microservice updates trade exchanges using POST and retrieves one, multiple records using GET APIs
+    version: v1
+    license:
+      name: Apache 2.0
+      url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+servers:
+  - url: https://lse.com/ms-londonstockexchange-api/api/v1
+    description: sampleURL
+    
+paths:
+    /trades:
+      post:
+        summary: Create stock exchange transactions
+        description: "Creates a new record in Trade Entity"
+        operationId: createTradeTransaction
+        tags:
+          - createTradeTransaction
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeExchangeRequestBody'
+        responses:
+          '200':
+            description: Success Response
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/TradeExchangeSuccessResponse'
+          default:
+            description: Default Error Response
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/StandardErrorResponse'
+    /stocks/prices:
+      get:
+        summary: Get all stock prices
+        description: "Gets all the list of stock prices"
+        operationId: getAllStockPrices
+        tags: 
+          - AllStockPrices
+        responses:
+          '200':
+            description: Success Response
+            content:
+              application/json:    
+                schema:
+                  $ref: "#/components/schemas/GetAllStockPricesResponse"
+          default:
+              description: Standard Error Response
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/StandardErrorResponse"
+    /stocks/{stock_symbol}/price:
+      get:
+        summary: Get a stock price
+        description: "Gets stock price of the company"
+        operationId: getStockPrice
+        tags: 
+          - StockPrice
+        parameters:
+          - name: stock_symbol
+            in: path
+            description: stock_symbol
+            required: true
+            schema:
+              type: string
+              example: "AAPL"
+        responses:
+          '200':
+            description: Success Response
+            content:
+              application/json:    
+                schema:
+                  $ref: "#/components/schemas/GetStockPriceResponse"
+          default:
+              description: Standard Error Response
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/StandardErrorResponse"
+    /stocks/prices/{stock_symbol}:
+      get:
+        summary: Get a range of stock prices
+        description: "Gets a range of stock prices"
+        operationId: getStockPricesList
+        tags: 
+          - StockPricesList
+        parameters:
+          - name: stock_symbol
+            in: path
+            description: stock_symbol
+            required: true
+            schema:
+              type: string
+              example: "AAPL,GOOGL"
+        responses:
+          '200':
+            description: Success Response
+            content:
+              application/json:    
+                schema:
+                  $ref: "#/components/schemas/GetAllStockPricesResponse"
+          default:
+              description: Standard Error Response
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/StandardErrorResponse"      
+components:
+  schemas:
+    TradeExchangeRequestBody:
+        properties:
+          stock_symbol:
+            description: "stock_symbol"
+            example: "AAPL"
+            type : string
+          price:
+            description : "price"
+            type : number
+            example: "150.50"
+          numberOfShares:
+            description : "numberOfShares"
+            type : number
+            example: "10.50"
+          broker_Id:
+            description: "broker_Id"
+            example: "B123"
+            type : string
+    TradeExchangeSuccessResponse:
+       properties:
+          tradeId:
+            type: string
+            description: "tradeId"
+            example: "T123"
+          statusMessage:
+            type: string
+            description: "statusMessage"
+            example: "Trade notification received successfully"    
+    StandardErrorResponse:
+        properties:
+          errorCode:
+            description: "Error code"
+            type: string
+            example: "400"
+          errorMessage:
+            description: "Error message"
+            type: string
+            example: "Bad request"
+    GetAllStockPricesResponse:
+        properties:
+          price:
+            type: array
+            items:
+              $ref: '#/components/schemas/StockPricesList'
+    StockPricesList:
+        properties:
+          stock_symbol:
+            description: "stock_symbol"
+            type: string
+            example: "AAPL"
+          currentValue:
+            description: "currentValue"
+            type: number
+            example: "155.75" 
+    GetStockPriceResponse:
+        properties:
+          stock_symbol:
+            type: string
+            description: "stock_symbol"
+            example: "AAPL"
+          currentValue:
+            type: number
+            description: "currentValue"
+            example: "155.75"  
