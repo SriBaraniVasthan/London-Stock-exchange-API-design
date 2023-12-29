@@ -16,8 +16,7 @@ API Response:
 HTTP Status Code: 201 Created (on success)
 {
   "tradeId": "T123",
-  "timestamp": "2023-01-01T12:00:00Z",
-  "message": "Trade notification received successfully"
+   "message": "Trade notification received successfully"
 }
 Error Codes:
 400 Bad Request (invalid data format)
