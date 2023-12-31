@@ -19,7 +19,7 @@ Key Components:
 Data Flow:
 1. Trade requests are initiated by the Brokers via WebSocket servers.
 2. API Gateway receives, routes GET requests directly to microservice for retrieving stock prices. But, it forwards POST requests with any transformation if required and publishes to Kafka partitions. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (sample: https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant Kafka topics, processes these trade events, Validates data, updates database.
-   a. api/v1/trades is an API that receives exchange of shares from brokers in real-time.
+   a. "api/v1/trades" is an API that receives exchange of shares from brokers in real-time.
 ```
    HTTP Method: POST
    Request body: Content-Type: application/json
@@ -43,7 +43,7 @@ Error Codes:
 401 Unauthorized (missing or invalid authentication)
 500 Internal Server Error (database or system failure)
 ```
-b. api/v1/stocks/{stock_symbol}/price is an API that retrieves the current price of a specific stock.
+b. "api/v1/stocks/{stock_symbol}/price" is an API that retrieves the current price of a specific stock.
 ```
 HTTP Method: GET, HTTP Status Code: 200 Created (on success)
 URL query Parameters: stock_symbol: The ticker symbol of the stock
@@ -54,7 +54,7 @@ API Response:
   "currentValue": 155.75
 }
 ```
-c. api/v1/stocks/prices is an API that retrieves prices for all stocks on the market.
+c. "api/v1/stocks/prices" is an API that retrieves prices for all stocks on the market.
 ```
    HTTP Method: GET, HTTP Status Code: 200 Created (on success)
    API Response:
@@ -71,7 +71,7 @@ c. api/v1/stocks/prices is an API that retrieves prices for all stocks on the ma
     ]
 }
 ```
-d. api/v1/stocks/prices?tickers={stock_symbol1,stock_symbol2,..} is an API that retrieves prices for a specified list of stock symbols.
+d. "api/v1/stocks/prices?tickers={stock_symbol1,stock_symbol2,..}" is an API that retrieves prices for a specified list of stock symbols.
 ```
 Query Parameters: AAPL,GOOGL
 HTTP Method: GET
