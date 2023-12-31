@@ -1,4 +1,5 @@
 **System Design for London Stock Exchange**
+
 The system is designed with an API First, Cloud native,agnostic approach to include both functional and non-functional requirements. 
 Key Components:
 1. WebSocket Servers: Facilitate real-time communication(for low latency) between authorized brokers and stock exchange for trade transactions.
@@ -14,6 +15,6 @@ Key Components:
 Data Flow:
 1. Trade requests are initiated by the Brokers via WebSocket servers.
 2. API Gateway receives, routes GET requests directly to microservice for retrieving stock prices. But, it forwards POST requests with any transformation if required and publishes to Kafka partitions.
-3. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant Kafka topics, processes these trade events, Validates data, updates database.
+3. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (sample: https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant Kafka topics, processes these trade events, Validates data, updates database.
 4. Postgresql database stores and manages trade data, stock information, and broker details.
 
