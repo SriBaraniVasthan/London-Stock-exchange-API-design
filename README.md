@@ -1,7 +1,7 @@
 # London-Stock-exchange-System Design 
 
 The system is designed with an API First, Cloud native,agnostic approach to include both functional and non-functional requirements. 
-![image](https://github.com/SriBaraniVasthan/London-Stock-exchange-API-design/assets/63550126/4036855e-59ed-49e5-b2c5-47bff4848e31)
+![LSEDesign](https://github.com/SriBaraniVasthan/London-Stock-exchange-API-design/assets/63550126/d86429e6-829a-407a-9b3c-205c689ec9a2)
 
 Key Components:
 1. WebSocket Servers: Facilitate real-time communication(for low latency) between authorized brokers and stock exchange for trade transactions.
