@@ -18,7 +18,7 @@ Key Components:
 **REST Endpoints:**
 Data Flow:
 1. Trade requests are initiated by the Brokers via WebSocket servers.
-2. API Gateway receives, routes GET requests directly to microservice for retrieving stock prices. But, it forwards POST requests with any transformation if required and publishes to Kafka partitions. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (sample: https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant Kafka topics, processes these trade events, Validates data, updates database.
+2. API Gateway receives, routes GET requests directly to microservice for retrieving stock prices. For POST requests, it forwards  with any transformation if required and publishes to Kafka partitions. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (sample: https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant partitioned Kafka topics,Validates data, processes these trade events, updates in the database.
    a. "api/v1/trades" is an API that receives exchange of shares from brokers in real-time.
 ```
    HTTP Method: POST
@@ -38,7 +38,7 @@ HTTP Status Code: 201 Created (on success)
   "tradeId": "T123",
    "message": "Trade notification received successfully"
 }
-Error Codes:
+Possible HTTP Error response Codes:
 400 Bad Request (invalid data format)
 401 Unauthorized (missing or invalid authentication)
 500 Internal Server Error (database or system failure)
@@ -87,13 +87,14 @@ API Response:
   },
   // ... other stocks in the range
 ]
-Error Codes:
+Possible HTTP Error response Codes:
 404 Not Found (stock not found)
 500 Internal Server Error (database or system failure)
 ```   
-4. Postgresql database stores and manages trade data, stock information, and broker details.
+4. Postgresql database stores and manages trade information, stock data, and broker details.
 
 **Postgresql Database**
+
 Entities: Trade, Stock, Broker 
 ![image](https://github.com/SriBaraniVasthan/London-Stock-exchange-API-design/assets/63550126/c65edda5-9ca5-4d0e-b81a-b463fb9d3646)
 
@@ -105,7 +106,7 @@ broker_name (VARCHAR),
 email (VARCHAR),
 activitystatus (VARCHAR)
 ```
-3. Trade table
+2. Trade table
 ```
 Fields:
 trade_id (INT PRIMARY KEY),
@@ -117,7 +118,7 @@ numberOfShares (INT),
 timestamp (DATETIME),
 orderStatus (VARCHAR) 
 ```
-5. Stock table
+3. Stock table
 ```
 Fields:
 stock_symbol (VARCHAR PRIMARY KEY)- One to many relationships with trade transactions,
