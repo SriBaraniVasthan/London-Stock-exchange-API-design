@@ -19,6 +19,7 @@ Key Components:
 Data Flow:
 1. Trade requests are initiated by the Brokers via WebSocket servers.
 2. API Gateway receives, routes GET requests directly to microservice for retrieving stock prices. For POST requests, it forwards  with any transformation if required and publishes to Kafka partitions. Kafka buffers trade events for asynchronous processing and sends published trade events to the POST API (sample: https://lse.com/ms-londonstockexchange-api/api/v1/trades.). This is subscribed to relevant partitioned Kafka topics,Validates data, processes these trade events, updates in the database.
+   
    a. "api/v1/trades" is an API that receives exchange of shares from brokers in real-time.
 ```
    HTTP Method: POST
