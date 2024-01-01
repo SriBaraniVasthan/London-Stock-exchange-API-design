@@ -50,7 +50,7 @@ paths:
             content:
               application/json:    
                 schema:
-                  $ref: "#/components/schemas/GetAllStockPricesResponse"
+                  $ref: "#/components/schemas/GetStockPricesResponse"
           default:
               description: Standard Error Response
               content:
