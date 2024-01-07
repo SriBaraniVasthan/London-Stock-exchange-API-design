@@ -8,11 +8,11 @@ info:
       url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 
 servers:
-  - url: https://lse.com/ms-londonstockexchange-api/api/v1
+  - url: https://lse.com/ms-londonstockexchange-api/api/v1/stocks
     description: sampleURL
     
 paths:
-    /trades:
+    /trade:
       post:
         summary: Create stock exchange transactions
         description: "Creates a new record in Trade Entity"
@@ -37,7 +37,7 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/StandardErrorResponse'
-    /stocks/prices:
+    /prices:
       get:
         summary: Get all stock prices
         description: "Gets all the list of stock prices"
@@ -57,7 +57,7 @@ paths:
                 application/json:
                   schema:
                     $ref: "#/components/schemas/StandardErrorResponse"
-    /stocks/{stock_symbol}/price:
+    /price/{stock_symbol}:
       get:
         summary: Get a stock price
         description: "Gets stock price of the company"
@@ -85,7 +85,7 @@ paths:
                 application/json:
                   schema:
                     $ref: "#/components/schemas/StandardErrorResponse"
-    /stocks/prices/{stock_symbol}:
+    /prices/{stock_symbol}:
       get:
         summary: Get a range of stock prices
         description: "Gets a range of stock prices"
