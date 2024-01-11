@@ -124,7 +124,5 @@ orderStatus (VARCHAR)
 Fields:
 stock_symbol (VARCHAR PRIMARY KEY)- One to many relationships with trade transactions,
 current_price (DECIMAL),
-company_name (VARCHAR),
-market_cap (DECIMAL)
 ```
 
